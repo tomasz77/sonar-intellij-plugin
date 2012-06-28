@@ -122,8 +122,13 @@ public class SonarModuleConfiguration extends BaseConfigurable implements Refres
     sonarModuleComponent.getState().host = txtHost.getText();
     sonarModuleComponent.getState().user = txtUser.getText();
     sonarModuleComponent.getState().password = new String(txtPassword.getPassword());
-    sonarModuleComponent.getState().projectKey = ((SonarProject) (cmbProject.getSelectedItem())).getResource().getKey();
-    sonarModuleComponent.getState().configured = true;
+    if (cmbProject.getSelectedItem() != null) {
+      sonarModuleComponent.getState().projectKey = ((SonarProject) (cmbProject.getSelectedItem())).getResource().getKey();
+      sonarModuleComponent.getState().configured = true;
+    } else {
+      sonarModuleComponent.getState().projectKey = "";
+      sonarModuleComponent.getState().configured = false;
+    }
   }
 
   @Override
